@@ -1,7 +1,7 @@
 // External Imports
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Geist, Inter } from "next/font/google";
 
-export const dmSans = DM_Sans({
+export const dmSans = Inter({
   subsets: ["latin"],
   display: "swap",
   style: ["normal", "italic"],
