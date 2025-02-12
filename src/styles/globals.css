@@ -8,10 +8,25 @@
   --breakpoint-sm: 400px;
   --breakpoint-smd: 532px;
   --breakpoint-md: 768px;
-  --breakpoint-lg: 976px;
-  --breakpoint-xl: 1440px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
   --breakpoint-3xl: 1920px;
+
+  --color-background: oklch(97.98% 0.0032 197.1);
+  --color-foreground: oklch(15.16% 0.026 65.2);
+
+  --color-brand-50: oklch(95.8% 0.022 58.78);
+  --color-brand-100: oklch(92.53% 0.041 62.54);
+  --color-brand-200: oklch(85.12% 0.083 60.41);
+  --color-brand-300: oklch(78.21% 0.123 59.37);
+  --color-brand-400: oklch(71.85% 0.159 54.96);
+  --color-brand-500: oklch(63.38% 0.158 52.03);
+  --color-brand-600: oklch(54.2% 0.134 51.84);
+  --color-brand-700: oklch(44.15% 0.106 52.94);
+  --color-brand-800: oklch(33.67% 0.078 54.04);
+  --color-brand-900: oklch(22.12% 0.046 60.1);
+  --color-brand-950: oklch(15.16% 0.026 65.2);
 }
 
 @utility container {
@@ -43,20 +58,19 @@
   }
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.tiny-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #666 transparent;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Hide increase/buttons controls in number input for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Hide increase/buttons controls in number input for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
