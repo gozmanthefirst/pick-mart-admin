@@ -1,20 +1,12 @@
 // External Imports
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ReactNode } from "react";
 
 // Local Imports
+import { ScreenSize } from "@/shared/components/screen-size";
+import { cn } from "@/shared/lib/utils/cn";
+import { dmSans } from "@/styles/fonts";
 import "@/styles/globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "pickMart Admin",
@@ -29,8 +21,12 @@ const RootLayout = async ({ children }: Props) => {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={cn(
+          `bg-background text-foreground antialiased`,
+          dmSans.className,
+        )}
       >
+        <ScreenSize />
         {children}
       </body>
     </html>
