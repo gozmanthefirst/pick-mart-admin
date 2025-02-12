@@ -88,7 +88,7 @@ export const ForgotPasswordForm = () => {
         </form.Field>
 
         <div className="mt-4 flex flex-col gap-3">
-          <Button form="sign-up-form" className="w-full" size={"lg"}>
+          <Button form="forgot-pwd-form" className="w-full" size={"lg"}>
             Request reset link
           </Button>
         </div>

@@ -210,7 +210,7 @@ export const ChangePasswordForm = () => {
         </form.Field>
 
         <div className="mt-4 flex flex-col gap-3">
-          <Button form="sign-up-form" className="w-full" size={"lg"}>
+          <Button form="change-pwd-form" className="w-full" size={"lg"}>
             Change password
           </Button>
         </div>

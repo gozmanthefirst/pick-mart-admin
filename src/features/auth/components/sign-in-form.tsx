@@ -137,7 +137,7 @@ export const SignInForm = () => {
         </form.Field>
 
         <div className="mt-4 flex flex-col gap-3">
-          <Button form="sign-up-form" className="w-full" size={"lg"}>
+          <Button form="sign-in-form" className="w-full" size={"lg"}>
             Sign in
           </Button>
 

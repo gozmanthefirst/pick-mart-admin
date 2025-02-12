@@ -79,7 +79,7 @@ export const ResetPasswordForm = () => {
 
       {/* form */}
       <form
-        id="change-pwd-form"
+        id="reset-pwd-form"
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -159,7 +159,7 @@ export const ResetPasswordForm = () => {
         </form.Field>
 
         <div className="mt-4 flex flex-col gap-3">
-          <Button form="sign-up-form" className="w-full" size={"lg"}>
+          <Button form="reset-pwd-form" className="w-full" size={"lg"}>
             Change password
           </Button>
         </div>
