@@ -9,8 +9,8 @@ import { dmSans } from "@/styles/fonts";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "pickMart Admin",
-  description: "pickMart Admin",
+  title: "PickMart Admin",
+  description: "PickMart Admin",
 };
 
 interface Props {
