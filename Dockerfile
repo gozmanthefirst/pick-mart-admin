@@ -12,7 +12,7 @@ FROM base AS deps
 COPY pnpm-lock.yaml package.json ./
 
 # Install dependencies
-RUN corepack enable pnpm && \
+RUN npm install -g pnpm && \
     pnpm install --frozen-lockfile
 
 # Rebuild the source code only when needed
@@ -24,7 +24,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # Build application
-RUN corepack enable pnpm && pnpm run build
+RUN npm install -g pnpm && pnpm run build
 
 # Production stage with only essential files
 FROM base AS runner
@@ -32,12 +32,13 @@ WORKDIR /app
 
 ENV NODE_ENV=production \
     HOSTNAME="0.0.0.0" \
-    PORT=3002
+    PORT=3003
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.env ./.env
 
 # Set the correct permission for prerender cache
 RUN mkdir .next
@@ -51,7 +52,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 USER nextjs
 
 # Expose the application port
-EXPOSE 3002
+EXPOSE 3003
 
 # Start the application
 CMD ["node", "server.js"]
