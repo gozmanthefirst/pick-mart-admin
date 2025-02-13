@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 
 // Local Imports
 import { Container } from "@/shared/components/container";
-import { LogoHeader } from "@/shared/components/logo-header";
 
 interface Props {
   children: ReactNode;

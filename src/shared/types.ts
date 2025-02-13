@@ -3,3 +3,9 @@ export type Admin = {
   email: string;
   products: number;
 };
+
+export type Product = {
+  name: string;
+  price: number;
+  quantity: number;
+};
