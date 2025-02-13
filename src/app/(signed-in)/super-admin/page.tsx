@@ -2,12 +2,15 @@
 import { TbPlus } from "react-icons/tb";
 
 // Local Imports
+import { adminTableColumns } from "@/features/super-admin/components/admin-table-column";
+import { admins } from "@/features/super-admin/data/admins";
 import { Button } from "@/shared/components/button";
+import { DataTable } from "@/shared/components/data-table";
 import { Separator } from "@/shared/components/separator";
 
 const SuperAdminPage = () => {
   return (
-    <div className="flex flex-1 flex-col gap-6 py-8 md:gap-8 md:py-12">
+    <div className="flex flex-1 flex-col gap-10 py-8 md:gap-12 md:py-12">
       {/* First Part */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-12">
         <div>
@@ -26,7 +29,7 @@ const SuperAdminPage = () => {
             </Button>
 
             {/* Small */}
-            <Button size={"lg"} className="mb-2 w-full md:hidden">
+            <Button size={"lg"} className="w-full md:hidden">
               <TbPlus size={20} strokeWidth={3} />
               <span>Add New</span>
             </Button>
@@ -35,6 +38,9 @@ const SuperAdminPage = () => {
       </div>
 
       <Separator />
+
+      {/* Admins Table */}
+      <DataTable columns={adminTableColumns} data={admins} />
     </div>
   );
 };
