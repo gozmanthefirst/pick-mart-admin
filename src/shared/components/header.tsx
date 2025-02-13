@@ -3,24 +3,27 @@
 // External Imports
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { HTMLAttributes, Ref, useState } from "react";
+import { TbLogout, TbSettings } from "react-icons/tb";
 
 // Local Imports
 import { Container } from "@/shared/components/container";
-import { TbLogout, TbSettings } from "react-icons/tb";
 import { cn } from "../lib/utils/cn";
 import { Avatar, AvatarFallback } from "./avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
-interface LogoHeaderProps extends HTMLAttributes<HTMLDivElement> {
+interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   ref?: Ref<HTMLDivElement>;
 }
 
-export const LogoHeader = ({ className, ref, ...props }: LogoHeaderProps) => {
+export const Header = ({ className, ref, ...props }: HeaderProps) => {
+  const pathname = usePathname();
+
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-100 flex border border-neutral-200 shadow bg-background">
+    <div className="sticky top-0 z-100 flex border border-neutral-200 bg-background shadow">
       <Container
         ref={ref}
         className={cn("flex items-center justify-between py-2", className)}
@@ -38,29 +41,35 @@ export const LogoHeader = ({ className, ref, ...props }: LogoHeaderProps) => {
         >
           <PopoverTrigger asChild>
             <Avatar className="cursor-default">
-              <AvatarFallback>SA</AvatarFallback>
+              <AvatarFallback>
+                {pathname === "/super-admin" ? "SA" : "AD"}
+              </AvatarFallback>
             </Avatar>
           </PopoverTrigger>
 
-          <PopoverContent
-            className="flex flex-col gap-3 p-3 text-sm md:text-base"
-          >
+          <PopoverContent className="flex flex-col gap-3 p-3 text-sm md:text-base">
             {/* Popover Header */}
-            <p className="text-xs text-neutral-500 smd:text-sm">Super Admin</p>
+            <p className="text-xs text-neutral-500 smd:text-sm">
+              {pathname === "/super-admin" ? "Super Admin" : "Admin"}
+            </p>
 
             <div className="flex flex-col gap-4 md:gap-4">
               {/* User Details */}
               <div className="flex items-center gap-3">
                 <Avatar className="size-10 md:size-12">
-                  <AvatarFallback>SA</AvatarFallback>
+                  <AvatarFallback>
+                    {pathname === "/super-admin" ? "SA" : "AD"}
+                  </AvatarFallback>
                 </Avatar>
 
                 <div className="-space-y-0.5 md:-space-y-1">
                   <p className="text-sm font-semibold text-neutral-800 md:text-base">
-                    Super Admin
+                    {pathname === "/super-admin" ? "Super Admin" : "Admin"}
                   </p>
                   <p className="text-xs text-neutral-600 md:text-sm">
-                    superadmin@email.com
+                    {pathname === "/super-admin"
+                      ? "superadmin@email.com"
+                      : "admin@email.com"}
                   </p>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 // Local Imports
 import { Container } from "@/shared/components/container";
-import { LogoHeader } from "@/shared/components/logo-header";
+import { Header } from "@/shared/components/header";
 
 interface Props {
   children: ReactNode;
@@ -12,7 +12,7 @@ interface Props {
 const AdminLayout = async ({ children }: Props) => {
   return (
     <div className="flex min-h-dvh flex-col">
-      <LogoHeader />
+      <Header />
       <Container className="flex flex-1 flex-col">{children}</Container>
     </div>
   );
