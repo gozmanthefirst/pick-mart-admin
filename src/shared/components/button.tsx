@@ -7,7 +7,7 @@ import { ButtonHTMLAttributes, forwardRef } from "react";
 import { cn } from "../lib/utils/cn";
 
 export const buttonVariants = cva(
-  "inline-flex gap-2 items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold cursor-pointer transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-70",
+  "inline-flex gap-2 items-center justify-center whitespace-nowrap rounded-xl text-sm font-semibold cursor-pointer transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -18,7 +18,7 @@ export const buttonVariants = cva(
         black:
           "bg-neutral-950 text-white shadow-sm lg:hover:bg-neutral-950/90 focus-visible:outline-neutral-950",
         secondary:
-          "bg-neutral-200 border border-neutral-300 text-brand-400 shadow-sm lg:hover:bg-neutral-300/70 focus-visible:outline-brand-400",
+          "bg-neutral-200 border border-neutral-300 text-foreground shadow-sm lg:hover:bg-neutral-300/70 focus-visible:outline-brand-400",
         grayed:
           "bg-neutral-600 text-foreground shadow-sm lg:hover:bg-neutral-600/90 focus-visible:outline-neutral-600",
         outline:

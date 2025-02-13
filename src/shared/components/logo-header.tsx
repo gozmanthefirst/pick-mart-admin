@@ -20,7 +20,7 @@ export const LogoHeader = ({ className, ref, ...props }: LogoHeaderProps) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-100 flex border border-neutral-200 shadow">
+    <div className="sticky top-0 z-100 flex border border-neutral-200 shadow bg-background">
       <Container
         ref={ref}
         className={cn("flex items-center justify-between py-2", className)}

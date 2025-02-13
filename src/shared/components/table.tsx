@@ -29,7 +29,7 @@ const TableHeader = forwardRef<
   <thead
     ref={ref}
     className={cn(
-      "[&_tr]:border [&_tr]:bg-transparent [&_tr]:text-neutral-500 [&>tr]:lg:hover:bg-neutral-200",
+      "[&_tr]:border [&_tr]:text-background [&>tr]:bg-foreground lg:hover:[&>tr]:bg-foreground",
       className,
     )}
     {...props}
@@ -87,7 +87,7 @@ const TableHead = forwardRef<
   <th
     ref={ref}
     className={cn(
-      "px-2 py-2 text-left align-middle text-sm font-bold first:rounded-l-md first:pl-6 last:rounded-r-md last:pr-6 last:text-right lg:py-3 lg:text-base [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "px-2 py-2 text-left align-middle text-sm font-bold first:pl-6 last:pr-6 last:text-right lg:py-3 lg:text-base [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       className,
     )}
     {...props}
