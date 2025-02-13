@@ -1,5 +1,6 @@
 // External Imports
 import type { Metadata } from "next";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ReactNode } from "react";
 
 // Local Imports
@@ -27,7 +28,7 @@ const RootLayout = async ({ children }: Props) => {
         )}
       >
         <ScreenSize />
-        {children}
+        <NuqsAdapter>{children}</NuqsAdapter>
       </body>
     </html>
   );

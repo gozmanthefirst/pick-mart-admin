@@ -2,10 +2,9 @@
 import { TbPlus } from "react-icons/tb";
 
 // Local Imports
-import { adminTableColumns } from "@/features/super-admin/components/admin-table-column";
+import { AdminTable } from "@/features/super-admin/components/admin-table";
 import { admins } from "@/features/super-admin/data/admins";
 import { Button } from "@/shared/components/button";
-import { DataTable } from "@/shared/components/data-table";
 import { Separator } from "@/shared/components/separator";
 
 const SuperAdminPage = () => {
@@ -14,7 +13,9 @@ const SuperAdminPage = () => {
       {/* First Part */}
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-12">
         <div>
-          <h1 className="text-3xl font-bold md:text-4xl">Admins (0)</h1>
+          <h1 className="text-3xl font-bold md:text-4xl">
+            Admins ({admins.length})
+          </h1>
           <p className="text-sm font-semibold text-neutral-400 md:text-base">
             Manage admins for your store
           </p>
@@ -40,7 +41,7 @@ const SuperAdminPage = () => {
       <Separator />
 
       {/* Admins Table */}
-      <DataTable columns={adminTableColumns} data={admins} />
+      <AdminTable />
     </div>
   );
 };
