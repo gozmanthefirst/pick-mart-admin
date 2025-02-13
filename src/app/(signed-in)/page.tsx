@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 
 const HomePage = () => {
-  redirect("/sign-in");
-
-  return <div>Home</div>;
+  redirect("/super-admin");
 };
 
 export default HomePage;
