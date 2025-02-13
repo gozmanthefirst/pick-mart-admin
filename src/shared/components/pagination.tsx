@@ -61,7 +61,7 @@ export const Pagination = ({ className, paginate, pageIndex }: Props) => {
     if (page < 1) {
       setPage(String(1));
     }
-  }, [page]);
+  }, [page, paginate.noOfpages, setPage]);
 
   const handlePageChange = (newPage: number) => {
     setPage(String(newPage));
