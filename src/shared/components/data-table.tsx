@@ -3,13 +3,18 @@
 // External Imports
 import {
   ColumnDef,
+  ColumnFiltersState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 // Local Imports
+import { Input } from "@/shared/components/input";
 import {
   Table,
   TableBody,
@@ -33,18 +38,39 @@ export const DataTable = <TData, TValue>({
   columns,
   pagination,
 }: DataTableProps<TData, TValue>) => {
+  const pathname = usePathname();
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnFiltersChange: setColumnFilters,
     getPaginationRowModel: getPaginationRowModel(),
     state: {
       pagination,
+      columnFilters,
     },
   });
 
   return (
-    <div>
+    <div className="flex flex-col gap-6 md:gap-8">
+      {/* Search */}
+      {/* <Input
+        placeholder={
+          pathname === "/super-admin"
+            ? "Filter admins..."
+            : "Filter products..."
+        }
+        value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+        onChange={(event) =>
+          table.getColumn("name")?.setFilterValue(event.target.value)
+        }
+        className="w-full smd:w-2/3 md:w-1/2 xl:w-1/3"
+      /> */}
+
       <Table className="min-w-[700px]">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
