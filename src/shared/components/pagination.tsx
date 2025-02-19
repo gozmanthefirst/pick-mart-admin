@@ -1,6 +1,7 @@
 "use client";
 
 // External Imports
+import { Table } from "@tanstack/react-table";
 import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
@@ -9,30 +10,31 @@ import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 import { cn } from "../lib/utils/cn";
 import { Button } from "./button";
 
-interface Props {
+interface Props<TData, TValue> {
+  table: Table<TData>;
   className?: string;
-  paginate: {
-    lowerLimit: number;
-    upperLimit: number;
-    first: boolean;
-    last: boolean;
-    noOfpages: number;
-    array: any[];
-  };
-  pageIndex: number;
 }
 
-export const Pagination = ({ className, paginate, pageIndex }: Props) => {
+export const Pagination = <TData, TValue>({
+  table,
+  className,
+}: Props<TData, TValue>) => {
   const [_, setPage] = useQueryState("page", { defaultValue: "" });
 
   const [paginationArray, setPaginationArray] = useState<string[]>([]);
 
+  const totalPages = table.getPageCount();
+  const totalRows = table.getRowCount();
+  const pageSize = table.getState().pagination.pageSize;
+  const pageIndex = table.getState().pagination.pageIndex;
+  const pageLowerLimit = pageSize * pageIndex + 1;
+  const calcUpperLimit = pageSize * pageIndex + pageSize;
+  const pageUpperLimit =
+    calcUpperLimit < totalRows ? calcUpperLimit : totalRows;
   const page = pageIndex + 1;
 
   useEffect(() => {
     const generatePaginationArray = () => {
-      const totalPages = paginate.noOfpages;
-
       if (totalPages <= 5) {
         return Array.from({ length: totalPages }, (_, i) => String(i + 1));
       } else if (pageIndex < 2 || pageIndex >= totalPages - 2) {
@@ -49,35 +51,31 @@ export const Pagination = ({ className, paginate, pageIndex }: Props) => {
     };
 
     setPaginationArray(generatePaginationArray());
-  }, [paginate.noOfpages, pageIndex, page]);
+  }, [totalPages, pageIndex, page]);
 
   useEffect(() => {
     if (page === 1) {
       setPage("");
     }
-    if (page > paginate.noOfpages) {
-      setPage(String(paginate.noOfpages));
+    if (page > totalPages) {
+      setPage(String(totalPages));
     }
     if (page < 1) {
       setPage(String(1));
     }
-  }, [page, paginate.noOfpages, setPage]);
-
-  const handlePageChange = (newPage: number) => {
-    setPage(String(newPage));
-  };
+  }, [page, totalPages, setPage]);
 
   return (
-    <section className="flex flex-col items-center gap-4 py-8 md:flex-row md:justify-between md:gap-6 md:py-10">
-      <div className="text-fgd-secondary text-sm md:text-base">
-        Results: {paginate.lowerLimit + 1} - {paginate.upperLimit} of{" "}
-        {paginate.array.length}
+    <section className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:gap-6">
+      <div className="text-sm md:text-base">
+        Results: {pageLowerLimit} - {pageUpperLimit} of {totalRows}
       </div>
 
       <div className={cn("flex items-center gap-2 md:gap-3", className)}>
+        {/* Previous Button */}
         <Button
-          onClick={() => handlePageChange(page - 1)}
-          disabled={paginate.first}
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
           variant="secondary"
           size={"icon"}
           className="flex-none gap-2"
@@ -85,14 +83,14 @@ export const Pagination = ({ className, paginate, pageIndex }: Props) => {
           <TbChevronLeft size={20} />
         </Button>
 
-        {/* Desktop Pagination */}
+        {/* Pagination */}
         <div className="flex flex-none items-center gap-2 md:gap-3">
           {paginationArray.map((item, index) => (
             <Button
               key={index}
               size="icon"
               onClick={() =>
-                !isNaN(Number(item)) && handlePageChange(Number(item))
+                !isNaN(Number(item)) && table.setPageIndex(Number(item) - 1)
               }
               disabled={item === "..."}
               variant={Number(item) === page ? "brand" : "secondary"}
@@ -106,20 +104,10 @@ export const Pagination = ({ className, paginate, pageIndex }: Props) => {
           ))}
         </div>
 
-        {/* Mobile Pagination */}
-        {/* <div className="flex items-center gap-3 lg:hidden">
-        <Button size="icon" variant="ghost" className={cn("font-semibold")}>
-          {page}
-        </Button>
-        <span>of</span>
-        <Button size="icon" variant="ghost" className={cn("font-semibold")}>
-          {paginate.noOfpages}
-        </Button>
-      </div> */}
-
+        {/* Next Button */}
         <Button
-          onClick={() => handlePageChange(page + 1)}
-          disabled={paginate.last}
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
           variant="secondary"
           size={"icon"}
           className="flex-none gap-2"
