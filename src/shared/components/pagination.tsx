@@ -2,7 +2,6 @@
 
 // External Imports
 import { Table } from "@tanstack/react-table";
-import { useQueryState } from "nuqs";
 import { useEffect, useState } from "react";
 import { TbChevronLeft, TbChevronRight } from "react-icons/tb";
 
@@ -19,8 +18,6 @@ export const Pagination = <TData, TValue>({
   table,
   className,
 }: Props<TData, TValue>) => {
-  const [_, setPage] = useQueryState("page", { defaultValue: "" });
-
   const [paginationArray, setPaginationArray] = useState<string[]>([]);
 
   const totalPages = table.getPageCount();
@@ -52,18 +49,6 @@ export const Pagination = <TData, TValue>({
 
     setPaginationArray(generatePaginationArray());
   }, [totalPages, pageIndex, page]);
-
-  useEffect(() => {
-    if (page === 1) {
-      setPage("");
-    }
-    if (page > totalPages) {
-      setPage(String(totalPages));
-    }
-    if (page < 1) {
-      setPage(String(1));
-    }
-  }, [page, totalPages, setPage]);
 
   return (
     <section className="flex flex-col items-center gap-4 md:flex-row md:justify-between md:gap-6">
