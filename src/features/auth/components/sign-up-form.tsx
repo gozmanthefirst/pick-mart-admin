@@ -204,7 +204,7 @@ export const SignUpForm = () => {
                   )}
                 </InputIcon>
               </div>
-              {formErrors.onChange && field.state.meta.errorMap["onChange"] ? (
+              {field.state.meta.errorMap["onChange"] ? (
                 <em className="-mt-1 text-xs text-red-600">
                   {field.state.meta.errorMap["onChange"]}
                 </em>
